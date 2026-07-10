@@ -6,6 +6,6 @@ import lombok.Data;
 
 @Data
 public class Taco {
-    String nombre;
+    String name;
     private List<Ingredient> ingredients;
 }
