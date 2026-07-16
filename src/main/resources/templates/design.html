@@ -7,7 +7,8 @@
         </head>
         <body>
             <h1>Design your taco!</h1>
-                <img th:src="@{/images/tacos.png}"/>
+                <img th:src="@{/images/tacos.png}"
+                    alt="Taco Cloud"/>
 
                 <form method="POST" th:object="${taco}">
                 <div class="grid">
@@ -59,11 +60,32 @@
                 </div>
                 <div>
 
-                <h3>Name your taco creation:</h3>
-                    <input type="text" th:field="*{name}"/>
-                <br/>
-                <button>Submit Your Taco</button>
+                <div class="validationError"
+                    th:if="${#fields.hasAnyErrors()}">
+                    Please correct the problems below and resubmit.
                 </div>
-                </form>
+
+                <div>
+                    <span class="validationError"
+                        th:if="${#fields.hasErrors('ingredients')}"
+                        th:errors="*{ingredients}">
+                        You must choose at least one ingredient
+                    </span>
+                </div>
+
+                <div>
+                    <h3>Name your taco creation:</h3>
+
+                    <input type="text"
+                        th:field="*{name}"/>
+
+                    <span class="validationError"
+                        th:if="${#fields.hasErrors('name')}"
+                        th:errors="*{name}">
+                        Taco name is required
+                    </span>
+                </div>
+
+                <button type="submit">Submit Your Taco</button>
         </body>
 </html>

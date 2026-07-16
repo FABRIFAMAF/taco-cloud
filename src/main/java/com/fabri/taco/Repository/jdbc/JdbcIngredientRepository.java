@@ -1,4 +1,4 @@
-package com.fabri.taco.Repository;
+package com.fabri.taco.Repository.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+
 
 import com.fabri.taco.Domain.Ingredient;
 
-@Repository
-public class JdbcIngredientRepository implements IngredientRepository {
+
+public class JdbcIngredientRepository implements JdbcIngredientOperations {
 
     private JdbcTemplate jdbcTemplate;
 
