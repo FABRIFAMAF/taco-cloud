@@ -9,6 +9,13 @@
 
 <body>
 
+    <div>
+        <form method="POST"
+            th:action="@{/logout}">
+            <button type="submit">Cerrar sesión</button>
+        </form>
+    </div>
+    
     <form method="POST"
           th:action="@{/orders}"
           th:object="${tacoOrder}">
