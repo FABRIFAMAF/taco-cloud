@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.boot.security.autoconfigure.web.servlet.PathRequest;
 
 @Configuration
 public class SecurityConfig {
@@ -21,10 +22,20 @@ public class SecurityConfig {
 
         return http
             .authorizeHttpRequests(authorize -> authorize
+                .requestMatchers(PathRequest.toH2Console())
+                    .permitAll()
                 .requestMatchers("/design/**", "/orders/**")
                     .hasRole("USER")
                 .anyRequest()
                     .permitAll()
+            )
+            .csrf(csrf -> csrf
+                .ignoringRequestMatchers(PathRequest.toH2Console())
+            )
+            .headers(headers -> headers
+                .frameOptions(frameOptions ->
+                    frameOptions.sameOrigin()
+                )
             )
             .formLogin(form -> form
                 .loginPage("/login")

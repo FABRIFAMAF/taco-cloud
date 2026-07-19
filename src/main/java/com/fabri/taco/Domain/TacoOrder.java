@@ -63,6 +63,8 @@ public class TacoOrder implements Serializable {
     )
     private List<Taco> tacos = new ArrayList<>();
 
+    private Long userId;
+
     public void addTaco(Taco taco) {
         tacos.add(taco);
     }
