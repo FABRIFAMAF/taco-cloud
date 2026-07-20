@@ -20,11 +20,19 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
 
-        return userRepository.findByUsername(username)
+        System.out.println("==========");
+        System.out.println("Buscando usuario: " + username);
+
+        UserDetails user = userRepository.findByUsername(username)
             .orElseThrow(() ->
                 new UsernameNotFoundException(
                     "Usuario no encontrado: " + username
                 )
             );
+
+        System.out.println("Usuario encontrado: " + user.getUsername());
+        System.out.println("==========");
+
+        return user;
     }
 }

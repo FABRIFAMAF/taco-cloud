@@ -8,16 +8,16 @@ import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.data.annotation.PersistenceCreator;
 
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+
 
 @Data
 @Table("USERS")
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
-@RequiredArgsConstructor
 public class User implements UserDetails {
 
     private static final long serialVersionUID = 1L;
@@ -33,6 +33,52 @@ public class User implements UserDetails {
     private final String state;
     private final String zip;
     private final String phoneNumber;
+
+    @PersistenceCreator
+    public User(
+            Long id,
+            String username,
+            String password,
+            String fullname,
+            String street,
+            String city,
+            String state,
+            String zip,
+            String phoneNumber) {
+
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.fullname = fullname;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public User(
+            String username,
+            String password,
+            String fullname,
+            String street,
+            String city,
+            String state,
+            String zip,
+            String phoneNumber) {
+
+        this(
+            null,
+            username,
+            password,
+            fullname,
+            street,
+            city,
+            state,
+            zip,
+            phoneNumber
+        );
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -18,7 +18,9 @@
                 <img th:src="@{/images/tacos.png}"
                     alt="Taco Cloud"/>
 
-                <form method="POST" th:object="${taco}">
+            <form method="POST"
+                th:action="@{/design}"
+                th:object="${taco}">
                 <div class="grid">
                 <div class="ingredient-group" id="wraps">
 
@@ -95,5 +97,6 @@
                 </div>
 
                 <button type="submit">Submit Your Taco</button>
+            </form>
         </body>
 </html>
